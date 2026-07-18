@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Background circle -->
+    <path
+        android:fillColor="#09090b"
+        android:pathData="M0,0h24v24H0z"/>
+    <!-- Bonsai tree -->
+    <path
+        android:strokeColor="#22c55e"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:fillColor="#00000000"
+        android:pathData="M12,22v-6"/>
+    <path
+        android:strokeColor="#22c55e"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:fillColor="#00000000"
+        android:pathData="M12,16c-3,0 -6,-2.5 -6,-6c0,-2.5 1.5,-4.5 3,-5.5C10,3.5 11,2 12,2s2,1.5 3,2.5c1.5,1 3,3 3,5.5c0,3.5 -3,6 -6,6z"/>
+    <path
+        android:strokeColor="#22c55e"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000"
+        android:pathData="M8,17c-2,-0.5 -4,-1 -5,-1"/>
+    <path
+        android:strokeColor="#22c55e"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000"
+        android:pathData="M16,17c2,-0.5 4,-1 5,-1"/>
+</vector>

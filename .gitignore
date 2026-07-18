@@ -1,0 +1,23 @@
+venv/
+bin/
+bin_exe/
+models/
+__pycache__/
+*.pyc
+*.log
+*.part
+
+# Build artifacts
+build/
+dist/
+*.exe
+*.apk
+
+# Android
+android/.gradle/
+android/app/.cxx/
+android/app/build/
+android/build/
+android/local.properties
+android/app/src/main/assets/Bonsai-*.gguf
+android/app/src/main/cpp/llama.cpp/
