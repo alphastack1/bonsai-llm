@@ -1,28 +1,33 @@
-# Bonsai 27B for Android
+# Bonsai for Android
 
 This directory builds a single, signed, arm64 Android APK. The APK contains the
-UI and PrismML `llama.cpp` runtime, but no model weights. On first launch, open
-**Models** to download these official Hugging Face artifacts into app-private
-storage:
+UI, PrismML `llama.cpp` runtime, and the official Bonsai 1.7B Q1 model for
+immediate offline text chat. Larger models are optional verified downloads into
+app-private storage:
 
-| Artifact | Size | Purpose |
+| Model | Download | Purpose |
 | --- | ---: | --- |
-| `Bonsai-27B-Q1_0.gguf` | 3.80 GB | 1-bit language model |
-| `Bonsai-27B-mmproj-Q8_0.gguf` | 629 MB | Vision tower/projector |
+| Bonsai 1.7B Q1 | Included (248 MB) | Fast offline text default |
+| Bonsai 4B Q1 | 572 MB | Text model for older/lower-memory phones |
+| Bonsai 8B Q1 | 1.16 GB | Higher-quality text on mainstream phones |
+| Bonsai 27B Q1 + Q8 projector | 4.43 GB | Flagship-class reasoning and vision |
 
-Downloads resume from `.part` files and are accepted only after their published
-SHA-256 hashes and exact byte sizes match. Allow roughly 4.95 GB of free storage
-for the weights plus download headroom.
+Bundled extraction and downloads resume from `.part` files and are accepted only
+after their published SHA-256 hashes and exact byte sizes match. The included
+model is copied from the APK into app-private storage on first launch, so allow
+roughly 500 MB for the APK plus extracted 1.7B model.
 
 ## Phone expectations
 
 - Android 9 or newer on `arm64-v8a`.
-- A 12 GB-class flagship is recommended. PrismML reports roughly 5.2 GB peak
-  memory for the language model at 4K context before vision overhead.
+- A 12 GB-class flagship is recommended for 27B. PrismML reports roughly 5.2 GB
+  peak memory for its language model at 4K context before vision overhead.
 - The Android build currently uses ARM CPU inference. PrismML's published phone
   speed is for its iPhone/MLX runtime, so do not assume the same speed on Android.
-- Photos are selected with Android's system picker and resized to at most 1280 px
-  in the WebView before being sent to the local server. Nothing is uploaded.
+- The official smaller Bonsai releases are text-only. Photos are enabled only
+  when 27B Vision is active, resized to at most 1280 px, and never uploaded.
+- Advanced settings expose CPU threads, context, system prompt, temperature,
+  Top-P, Top-K, and response length. Try 4-6 threads on heterogeneous phone CPUs.
 
 ## Build and install
 
@@ -37,8 +42,8 @@ The current Windows cross-build also expects MSYS2 UCRT64 `g++` at
 server-UI stub. Bonsai's own WebView UI is packaged separately in the APK.
 
 The script checks the Android toolchain, pins PrismML's runtime to commit
-`62061f91088281e65071cc38c5f69ee95c39f14e`, removes stale bundled GGUF assets,
-and creates:
+`62061f91088281e65071cc38c5f69ee95c39f14e`, downloads and verifies the official
+1.7B asset when necessary, and creates:
 
 ```text
 app\build\outputs\apk\release\app-release.apk
@@ -53,8 +58,8 @@ adb install -r app\build\outputs\apk\release\app-release.apk
 ## Runtime configuration
 
 The app starts `llama-server` on loopback only with the 4-bit K/V cache, Flash
-Attention, a 4096-token default context, and the Q8 vision projector. Interrupted
-weight downloads can be retried without starting again from zero.
+Attention, and a 4096-token default context. The Q8 vision projector is loaded
+only for Bonsai 27B Vision. Interrupted downloads resume from `.part` files.
 
 Official resources:
 

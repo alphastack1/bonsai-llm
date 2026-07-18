@@ -181,8 +181,9 @@ public class MainActivity extends AppCompatActivity {
                     new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1);
         }
 
-        // The installable APK contains the runtime only. Start inference if a
-        // previous first-run download is present; otherwise stay in setup mode.
+        // Start a previously installed model immediately. On a fresh install,
+        // ModelManager extracts the included 1.7B model in the background and
+        // starts it as soon as checksum verification completes.
         startDownloadedModelIfAvailable();
     }
 
@@ -258,11 +259,12 @@ public class MainActivity extends AppCompatActivity {
     private void startDownloadedModelIfAvailable() {
         File model = modelManager.getActiveModelFile();
         File projector = modelManager.getActiveProjectorFile();
-        if (model == null || projector == null) {
-            Log.i(TAG, "Bonsai 27B has not been downloaded yet");
+        if (model == null) {
+            Log.i(TAG, "Active Bonsai model is not installed yet");
             return;
         }
-        reloadLlamaService(model.getAbsolutePath(), projector.getAbsolutePath(),
+        reloadLlamaService(model.getAbsolutePath(),
+                projector == null ? null : projector.getAbsolutePath(),
                 modelManager.getActiveModelName());
     }
 

@@ -33,7 +33,7 @@ public class LlamaService extends Service {
     private volatile Process llamaProcess;
     private volatile String modelPath;
     private volatile String projectorPath;
-    private volatile String modelName = "Bonsai 27B";
+    private volatile String modelName = "Bonsai";
     private volatile String state = "stopped";
     private volatile String lastError;
     private int port = 8080;
@@ -100,8 +100,14 @@ public class LlamaService extends Service {
         updateNotification("Loading model...");
         stopLlamaProcess();
 
-        if (newModelPath != null) this.modelPath = newModelPath;
-        if (newProjectorPath != null) this.projectorPath = newProjectorPath;
+        if (newModelPath != null) {
+            this.modelPath = newModelPath;
+            // A text-only model deliberately clears a projector left over from
+            // a previously loaded multimodal model.
+            this.projectorPath = newProjectorPath;
+        } else if (newProjectorPath != null) {
+            this.projectorPath = newProjectorPath;
+        }
         if (newModelName != null) this.modelName = newModelName;
         if (newThreads >= 0) this.threads = newThreads;
         if (newCtxSize > 0) this.ctxSize = newCtxSize;
@@ -116,7 +122,7 @@ public class LlamaService extends Service {
             fail("Model file not found");
             return;
         }
-        if (projector == null || !projector.isFile()) {
+        if (projector != null && !projector.isFile()) {
             fail("Vision projector not found");
             return;
         }
@@ -133,8 +139,10 @@ public class LlamaService extends Service {
         command.add(serverBinary);
         command.add("-m");
         command.add(model.getAbsolutePath());
-        command.add("--mmproj");
-        command.add(projector.getAbsolutePath());
+        if (projector != null) {
+            command.add("--mmproj");
+            command.add(projector.getAbsolutePath());
+        }
         command.add("--host");
         command.add("127.0.0.1");
         command.add("--port");
