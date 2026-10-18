@@ -204,7 +204,8 @@ public class MainActivity extends AppCompatActivity {
 
         final WebViewAssetLoader assetLoader = new WebViewAssetLoader.Builder()
                 .setHttpAllowed(true)
-                .setDomain("127.0.0.1")
+                // WebKit 1.12 matches Uri.getAuthority(), including the port.
+                .setDomain("127.0.0.1:" + LLAMA_PORT)
                 .addPathHandler("/assets/",
                         new WebViewAssetLoader.AssetsPathHandler(this))
                 .build();
