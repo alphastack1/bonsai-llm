@@ -204,6 +204,7 @@ public class MainActivity extends AppCompatActivity {
 
         final WebViewAssetLoader assetLoader = new WebViewAssetLoader.Builder()
                 .setHttpAllowed(true)
+                .setDomain("127.0.0.1")
                 .addPathHandler("/assets/",
                         new WebViewAssetLoader.AssetsPathHandler(this))
                 .build();
@@ -235,7 +236,8 @@ public class MainActivity extends AppCompatActivity {
                     WebView view, WebResourceRequest request) {
                 Uri uri = request.getUrl();
                 if ("http".equalsIgnoreCase(uri.getScheme())
-                        && WebViewAssetLoader.DEFAULT_DOMAIN.equalsIgnoreCase(uri.getHost())) {
+                        && "127.0.0.1".equals(uri.getHost()) && uri.getPort() == LLAMA_PORT
+                        && uri.getPath() != null && uri.getPath().startsWith("/assets/")) {
                     return false;
                 }
                 if ("http".equalsIgnoreCase(uri.getScheme())
@@ -252,11 +254,10 @@ public class MainActivity extends AppCompatActivity {
 
         modelManager = new ModelManager(this);
         webView.addJavascriptInterface(modelManager, "BonsaiNative");
-        // HTTP is deliberate here: both the intercepted app asset and the
-        // loopback llama-server use HTTP, avoiding an HTTPS-to-HTTP mixed-
-        // content failure while retaining a normal, non-file web origin.
-        webView.loadUrl("http://" + WebViewAssetLoader.DEFAULT_DOMAIN
-                + "/assets/index.html?apk=1&port=" + LLAMA_PORT);
+        // UI assets are intercepted locally at the engine's exact origin.
+        // Same-origin streaming avoids mixed content, private-network
+        // preflights and cross-origin Authorization-header restrictions.
+        webView.loadUrl("http://127.0.0.1:" + LLAMA_PORT + "/assets/index.html");
     }
 
     private void startDownloadedModelIfAvailable() {

@@ -4,7 +4,5 @@
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="false">127.0.0.1</domain>
         <domain includeSubdomains="false">localhost</domain>
-        <!-- Reserved WebViewAssetLoader host; content is intercepted in-app. -->
-        <domain includeSubdomains="false">appassets.androidplatform.net</domain>
     </domain-config>
 </network-security-config>
