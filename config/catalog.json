@@ -1,0 +1,102 @@
+{
+  "version": 3,
+  "family": "Bonsai 2",
+  "runtime": {
+    "tag": "prism-b10777-e3de715",
+    "commit": "e3de715222b2667c54a267441159a5729f11155e",
+    "engines": {
+      "windows-vulkan": {
+        "file": "llama-prism-b10777-e3de715-bin-win-vulkan-x64.zip",
+        "url": "https://github.com/PrismML-Eng/llama.cpp/releases/download/prism-b10777-e3de715/llama-prism-b10777-e3de715-bin-win-vulkan-x64.zip",
+        "bytes": 31298865,
+        "sha256": "6bf30d60dd35ae1129ae221593d79bed053c775c6ce8554f75cfe171f3028f10"
+      },
+      "windows-cpu": {
+        "file": "llama-prism-b10777-e3de715-bin-win-cpu-x64.zip",
+        "url": "https://github.com/PrismML-Eng/llama.cpp/releases/download/prism-b10777-e3de715/llama-prism-b10777-e3de715-bin-win-cpu-x64.zip",
+        "bytes": 19530958,
+        "sha256": "cff7eeff19163e6263720618cf98023715b8dac14d0873f5be0918765de323c4"
+      },
+      "windows-cuda": {
+        "file": "llama-prism-b10777-e3de715-bin-win-cuda-12.4-x64.zip",
+        "url": "https://github.com/PrismML-Eng/llama.cpp/releases/download/prism-b10777-e3de715/llama-prism-b10777-e3de715-bin-win-cuda-12.4-x64.zip",
+        "bytes": 313951324,
+        "sha256": "fa5874a1412e251a6efb13f289e97bacbbb4e7fc6714c1836b4fc6c1dc863462"
+      },
+      "cuda-runtime": {
+        "file": "cudart-llama-bin-win-cuda-12.4-x64.zip",
+        "url": "https://github.com/PrismML-Eng/llama.cpp/releases/download/prism-b10777-e3de715/cudart-llama-bin-win-cuda-12.4-x64.zip",
+        "bytes": 391443627,
+        "sha256": "8c79a9b226de4b3cacfd1f83d24f962d0773be79f1e7b75c6af4ded7e32ae1d6"
+      },
+      "android": {
+        "file": "llama-prism-b10777-e3de715-bin-android-arm64.tar.gz",
+        "url": "https://github.com/PrismML-Eng/llama.cpp/releases/download/prism-b10777-e3de715/llama-prism-b10777-e3de715-bin-android-arm64.tar.gz",
+        "bytes": 78103073,
+        "sha256": "0f610d8cdc190349b212040453e05c8fd46a315c3323d3558818790d7399cbaa"
+      }
+    }
+  },
+  "models": {
+    "2B": {
+      "name": "Bonsai 2 2B",
+      "label": "Quick",
+      "description": "Small and responsive. Included for offline chat.",
+      "bundled": true,
+      "model": {
+        "file": "Ternary-Bonsai-2-2B-PQ2_0.gguf",
+        "url": "https://huggingface.co/prism-ml/Ternary-Bonsai-2-2B-gguf/resolve/683f7be2629342a50987627b40881e54761a2430/Ternary-Bonsai-2-2B-PQ2_0.gguf?download=true",
+        "bytes": 517312992,
+        "sha256": "d5f01a4ecaf49239653308ee732ad1a0c5f802c0ddb997549fc7b694c8b45928"
+      },
+      "projector": {
+        "file": "Ternary-Bonsai-2-2B-mmproj-Q8_0.gguf",
+        "url": "https://huggingface.co/prism-ml/Ternary-Bonsai-2-2B-gguf/resolve/683f7be2629342a50987627b40881e54761a2430/Ternary-Bonsai-2-2B-mmproj-Q8_0.gguf?download=true",
+        "bytes": 364664352,
+        "sha256": "ac9934e8d7966d0d62442c202ec8fdad99a045dea79366c1a4a246a46f5c0533"
+      },
+      "source": "https://huggingface.co/prism-ml/Ternary-Bonsai-2-2B-gguf",
+      "revision": "683f7be2629342a50987627b40881e54761a2430"
+    },
+    "4B": {
+      "name": "Bonsai 2 4B",
+      "label": "Everyday",
+      "description": "A balance of useful answers, speed, and memory.",
+      "bundled": false,
+      "model": {
+        "file": "Ternary-Bonsai-2-4B-PQ2_0.gguf",
+        "url": "https://huggingface.co/prism-ml/Ternary-Bonsai-2-4B-gguf/resolve/8d6557168168f91ea6697a4a49ed2ef622b53adb/Ternary-Bonsai-2-4B-PQ2_0.gguf?download=true",
+        "bytes": 1146465120,
+        "sha256": "d406b1e912c0d2a4c124ad10bf38a76ae662fdc4d24b176451403dc7b7f30409"
+      },
+      "projector": {
+        "file": "Ternary-Bonsai-2-4B-mmproj-Q8_0.gguf",
+        "url": "https://huggingface.co/prism-ml/Ternary-Bonsai-2-4B-gguf/resolve/8d6557168168f91ea6697a4a49ed2ef622b53adb/Ternary-Bonsai-2-4B-mmproj-Q8_0.gguf?download=true",
+        "bytes": 366894624,
+        "sha256": "db939d5f9b7014137810205e91d05e5f54afd72b0b3af9d33bd7d82f7906a55d"
+      },
+      "source": "https://huggingface.co/prism-ml/Ternary-Bonsai-2-4B-gguf",
+      "revision": "8d6557168168f91ea6697a4a49ed2ef622b53adb"
+    },
+    "9B": {
+      "name": "Bonsai 2 9B",
+      "label": "Smart",
+      "description": "More capable for writing, coding, and complex questions.",
+      "bundled": false,
+      "model": {
+        "file": "Ternary-Bonsai-2-9B-PQ2_0.gguf",
+        "url": "https://huggingface.co/prism-ml/Ternary-Bonsai-2-9B-gguf/resolve/5b2abb02362efbed46bbe204014b02837778b2c2/Ternary-Bonsai-2-9B-PQ2_0.gguf?download=true",
+        "bytes": 2416851840,
+        "sha256": "7a89ab48f5038c704480f60781f9b8d4035351f5f6beb7d11fad80001fde23f9"
+      },
+      "projector": {
+        "file": "Ternary-Bonsai-2-9B-mmproj-Q8_0.gguf",
+        "url": "https://huggingface.co/prism-ml/Ternary-Bonsai-2-9B-gguf/resolve/5b2abb02362efbed46bbe204014b02837778b2c2/Ternary-Bonsai-2-9B-mmproj-Q8_0.gguf?download=true",
+        "bytes": 624229664,
+        "sha256": "e0cb6f6988cea323ef798cd77d019bbb819af75582f034eaab0e7232314953db"
+      },
+      "source": "https://huggingface.co/prism-ml/Ternary-Bonsai-2-9B-gguf",
+      "revision": "5b2abb02362efbed46bbe204014b02837778b2c2"
+    }
+  }
+}

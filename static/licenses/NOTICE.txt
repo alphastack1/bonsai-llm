@@ -1,0 +1,23 @@
+Bonsai 2 local app — third-party model and runtime credits
+
+The Bonsai 2 2B, 4B, and 9B language and vision models are released by PrismML,
+derived from Qwen3.5 by the Qwen contributors, under Apache License 2.0.
+No model training, fine-tuning or requantization is claimed by this application.
+
+Original models:
+https://huggingface.co/prism-ml/Ternary-Bonsai-2-2B-gguf
+https://huggingface.co/prism-ml/Ternary-Bonsai-2-4B-gguf
+https://huggingface.co/prism-ml/Ternary-Bonsai-2-9B-gguf
+
+The local inference engine is the PrismML fork of llama.cpp and ggml, with
+upstream contributors' licenses. The original release packages, source and
+applicable notices are available at:
+https://github.com/PrismML-Eng/llama.cpp/releases/tag/prism-b10777-e3de715
+https://github.com/PrismML-Eng/llama.cpp
+https://github.com/ggml-org/llama.cpp
+
+Optional NVIDIA runtime libraries are supplied from PrismML's published CUDA
+redistributable packages and remain subject to NVIDIA's applicable terms.
+
+The bundled Outfit font is by Rodrigo Fuenzalida; JetBrains Mono is by
+JetBrains. Both use the SIL Open Font License 1.1. See the adjacent font license.

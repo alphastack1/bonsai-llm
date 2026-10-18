@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f8f9f5">
+  <title>Bonsai 2 · Your space to think</title>
+  <link rel="icon" href="bonsai-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+<svg class="svg-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="m6 12 6-6 6 6M12 6v13"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M20 15a3 3 0 0 1-3 3H9l-5 3V6a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3z"/></symbol>
+  <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M19 4C7 2 1 9 7 16s15 0 12-12ZM6 21c1-6 4-10 9-13"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></symbol>
+  <symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h16M4 17h16M8 4v6M16 14v6"/></symbol>
+  <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8" cy="8" r="1.5"/><path d="m3 17 5-5 4 4 4-6 5 7"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="m8 10 4 4 4-4"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h3"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7M14 10v7"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5z"/></symbol>
+</defs></svg>
+<div id="sidebar-scrim" class="scrim" hidden></div>
+<aside id="sidebar" class="sidebar" aria-label="Chat navigation">
+  <a class="brand" href="#" aria-label="Bonsai home"><span class="brand-symbol">✳</span><span>bonsai<span class="brand-two">2</span></span></a>
+  <button class="new-chat" id="new-chat"><svg><use href="#i-plus"/></svg> New conversation <span class="shortcut">⌘ N</span></button>
+  <div class="nav-label">YOUR CONVERSATIONS</div>
+  <nav id="history" class="history" aria-label="Saved conversations"></nav>
+  <div class="sidebar-bottom">
+    <button id="open-models" class="nav-button"><svg><use href="#i-grid"/></svg> Model library <span class="count">3</span></button>
+    <button id="open-settings" class="nav-button"><svg><use href="#i-settings"/></svg> Settings</button>
+    <div class="local-note"><span class="local-dot"></span><div>At home on your device.<small>Private. Local. Yours.</small></div></div>
+  </div>
+</aside>
+<main>
+  <header>
+    <div class="header-left"><button id="menu" class="icon-button mobile-only" aria-label="Open navigation"><svg><use href="#i-menu"/></svg></button><span class="header-title">Your workspace</span><span class="header-slash">/</span><span id="chat-title">New conversation</span></div>
+    <button id="model-picker" class="model-picker"><span class="status-dot" id="status-dot"></span><span id="model-name">Bonsai 2</span><svg><use href="#i-down"/></svg></button>
+  </header>
+  <div id="status-bar" class="status-bar" role="status" hidden></div>
+  <div class="conversation" id="conversation">
+    <section id="welcome" class="welcome">
+      <div class="welcome-emblem"><svg><use href="#i-leaf"/></svg></div>
+      <div class="eyebrow">A LITTLE SPACE FOR BIG IDEAS</div>
+      <h1>What’s on your mind?</h1>
+      <p>A fresh perspective, a first draft, a question worth asking.<br>Your own AI, right here on your device.</p>
+      <div class="suggestions">
+        <button data-prompt="Help me turn a rough idea into a simple, practical plan. Ask me what the idea is first."><span class="suggestion-icon sage"><svg><use href="#i-leaf"/></svg></span><strong>Grow an idea</strong><span>Find a good place to start</span><span class="suggestion-arrow">↗</span></button>
+        <button data-prompt="Help me write something clear and natural. Ask me what I want to write and who it is for."><span class="suggestion-icon peach"><svg><use href="#i-chat"/></svg></span><strong>Find the right words</strong><span>Make your next draft easier</span><span class="suggestion-arrow">↗</span></button>
+        <button data-prompt="Teach me something interesting about how computers work. Keep it simple and use an everyday example."><span class="suggestion-icon lavender"><svg><use href="#i-spark"/></svg></span><strong>Follow your curiosity</strong><span>Make something click</span><span class="suggestion-arrow">↗</span></button>
+      </div>
+      <div class="welcome-privacy"><svg><use href="#i-lock"/></svg> No cloud. No account. Just you and your ideas.</div>
+    </section>
+    <div id="messages" class="messages" aria-live="polite" aria-label="Conversation"></div>
+  </div>
+  <div class="composer-wrap">
+    <div id="attachment" class="attachment" hidden><img alt="Attached image" id="attachment-image"><span>Image stays on this device</span><button id="remove-image" class="icon-button" aria-label="Remove image"><svg><use href="#i-close"/></svg></button></div>
+    <form id="composer" class="composer">
+      <label class="sr-only" for="prompt">Message Bonsai</label>
+      <textarea id="prompt" placeholder="Ask anything, think out loud…" rows="1" maxlength="100000"></textarea>
+      <div class="composer-actions"><div class="composer-tools"><button type="button" id="attach-image" class="icon-button" aria-label="Attach an image" title="Download and enable image support in Model library"><svg><use href="#i-image"/></svg></button><span class="tool-divider"></span><button type="button" id="thinking" class="thinking" aria-pressed="false" title="Think longer for harder questions. Answers take more time."><svg><use href="#i-spark"/></svg> Think deeper</button></div><button id="send" class="send-button" type="submit" aria-label="Send message" disabled><svg><use href="#i-arrow"/></svg></button></div>
+    </form>
+    <div class="composer-footer"><span><span class="local-dot"></span> Runs entirely on your device</span><span id="generation-info">Bonsai can make mistakes. Stay curious.</span></div>
+    <input id="image-input" type="file" accept="image/png,image/jpeg,image/webp" hidden>
+  </div>
+</main>
+<dialog id="library" aria-labelledby="library-title">
+  <div class="dialog-header"><div><span class="eyebrow">MAKE YOURSELF AT HOME</span><h2 id="library-title">Your model library</h2></div><button class="icon-button close-dialog" aria-label="Close model library"><svg><use href="#i-close"/></svg></button></div>
+  <p class="dialog-intro">Every model runs on this device. Download once, then chat offline—even in airplane mode.</p>
+  <div id="model-list"></div>
+  <div class="library-note"><svg><use href="#i-lock"/></svg><span>2B is included in the app. Larger models and image support are optional local downloads. Your conversations and photos are never uploaded.</span></div>
+</dialog>
+<dialog id="settings" aria-labelledby="settings-title">
+  <div class="dialog-header"><div><span class="eyebrow">A FEW PERSONAL TOUCHES</span><h2 id="settings-title">Your preferences</h2></div><button class="icon-button close-dialog" aria-label="Close settings"><svg><use href="#i-close"/></svg></button></div>
+  <form id="settings-form">
+    <label class="setting">Context length<select id="context"><option value="4096">4,096 tokens · lightest</option><option value="8192">8,192 tokens</option><option value="16384">16,384 tokens · balanced</option><option value="32768">32,768 tokens · more memory</option></select><small>Space for your conversation and the answer. Longer contexts use more memory.</small></label>
+    <label class="setting">CPU threads<select id="threads"><option value="0">Automatic</option><option value="2">2 threads</option><option value="4">4 threads</option><option value="6">6 threads</option><option value="8">8 threads</option><option value="12">12 threads</option></select></label>
+    <label class="setting" id="backend-setting">Acceleration<select id="backend"><option value="auto">Automatic · GPU with CPU fallback</option><option value="vulkan">Vulkan GPU</option><option value="cuda">NVIDIA CUDA</option><option value="cpu">CPU only</option></select><small id="backend-note">GPU acceleration depends on the installed engine and your device.</small></label>
+    <button type="button" id="download-cuda" class="secondary" hidden>Download NVIDIA engine</button>
+    <label class="setting">How should Bonsai respond?<textarea id="system-prompt" rows="3" maxlength="4000" placeholder="You are a helpful assistant."></textarea><small>Optional instructions, saved only on this device.</small></label>
+    <button class="primary" type="submit" id="save-settings">Save preferences</button>
+    <p class="settings-note">Engine changes reload the active model. Your conversations are saved locally.</p>
+  </form>
+</dialog>
+<div id="toast" role="alert" hidden></div>
+</body>
+</html>

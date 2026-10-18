@@ -40,7 +40,7 @@ import java.io.File;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "BonsaiLLM";
     private static final int LLAMA_PORT = 8080;
-    private static final String PREFS = "bonsai_settings";
+    private static final String PREFS = "bonsai2_engine";
     private static final String PREF_THREADS = "threads";
     private static final String PREF_CTX = "ctx_size";
 
@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
     private volatile boolean serviceStarting = false;
     private volatile String serviceStartError;
     private ModelManager modelManager;
+    private final String apiToken = java.util.UUID.randomUUID().toString() + java.util.UUID.randomUUID();
+    public String getApiToken() { return apiToken; }
     private ValueCallback<Uri[]> pendingFileChooser;
 
     private final ActivityResultLauncher<String> imagePicker = registerForActivityResult(
@@ -88,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
     /** A 4K default leaves room for an image prompt without excessive phone RAM use. */
     public int getCtxSizePref() {
-        return prefs().getInt(PREF_CTX, 4096);
+        return prefs().getInt(PREF_CTX, 16384);
     }
 
     public void applyEngineSettings(int newThreads, int newCtxSize) {
@@ -118,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("projector_path", projectorPath);
         intent.putExtra("model_name", modelName);
         intent.putExtra("port", LLAMA_PORT);
+        intent.putExtra("api_token", apiToken);
         intent.putExtra("threads", getThreadsPref());
         intent.putExtra("ctx_size", getCtxSizePref());
         serviceStarting = true;
@@ -149,8 +152,8 @@ public class MainActivity extends AppCompatActivity {
 
         WindowInsetsControllerCompat controller =
                 new WindowInsetsControllerCompat(getWindow(), getWindow().getDecorView());
-        controller.setAppearanceLightStatusBars(false);
-        controller.setAppearanceLightNavigationBars(false);
+        controller.setAppearanceLightStatusBars(true);
+        controller.setAppearanceLightNavigationBars(true);
 
         webView = new WebView(this);
         setContentView(webView);
@@ -163,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         View root = findViewById(android.R.id.content);
-        root.setBackgroundColor(0xFF09090B);
+        root.setBackgroundColor(0xFFF8F9F5);
         ViewCompat.setOnApplyWindowInsetsListener(root, (view, windowInsets) -> {
             Insets bars = windowInsets.getInsets(
                     WindowInsetsCompat.Type.systemBars()
@@ -182,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Start a previously installed model immediately. On a fresh install,
-        // ModelManager extracts the included 1.7B model in the background and
+        // ModelManager extracts the included Bonsai 2 2B model in the background and
         // starts it as soon as checksum verification completes.
         startDownloadedModelIfAvailable();
     }
@@ -205,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
                         new WebViewAssetLoader.AssetsPathHandler(this))
                 .build();
 
-        webView.setBackgroundColor(0xFF09090B);
+        webView.setBackgroundColor(0xFFF8F9F5);
         webView.setClipToPadding(false);
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
@@ -318,6 +321,7 @@ public class MainActivity extends AppCompatActivity {
             webView.destroy();
             webView = null;
         }
+        if (modelManager != null) modelManager.close();
         super.onDestroy();
     }
 }
